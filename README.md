@@ -32,14 +32,18 @@ A Petstore-style REST API built with **Node.js + Express**, supporting
 ### `.env.mongo`
 
 DB_TYPE=mongo
+
 MONGO_URL=mongodb://mongo:27017/petstore
-PORT=3000```
+
+PORT=3000
 
 ### `.env.postgres`
 
 
 DB_TYPE=postgres
+
 POSTGRES_URL=postgres://postgres:postgres@postgres:5432/petstore
+
 PORT=3000
 
 
@@ -62,19 +66,23 @@ ENV_FILE=.env.sql docker compose --profile sql up
 ## Run the test locally
 
 npm run test:mongo
+
 npm run test:sql
 
 ## Inspect MongoDb
 
 
 docker exec -it petstore-node-mongo-mongo-1 mongosh
+
 use petstore
+
 db.pets.find().pretty()
 
 
 ## Inspect PostgreSQL
 
-
 docker exec -it petstore-node-mongo-postgres-1 psql -U postgres -d petstore
+
 \dt
+
 SELECT * FROM "Pets";
