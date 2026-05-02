@@ -12,8 +12,8 @@ describe('Pet API – full CRUD ', () => {
   
   afterEach(async () => {
     const ids = getTrackedPets();
-    // await db.deletePetsByIds(ids);
-    // clearTrackedPets();
+    await db.deletePetsByIds(ids);
+    clearTrackedPets();
   });
   
   afterAll(async () => {
