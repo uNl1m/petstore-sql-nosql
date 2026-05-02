@@ -1,0 +1,105 @@
+
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Petstore API (Local)",
+    "version": "1.0.0",
+    "description": "Local Petstore API backed by MongoDB or PostgreSQL"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000",
+      "description": "Local server"
+    }
+  ],
+  "paths": {
+    "/pet": {
+      "post": {
+        "summary": "Create a pet",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Pet"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": { "description": "Pet created" }
+        }
+      }
+    },
+    "/pet/{id}": {
+      "get": {
+        "summary": "Get pet by ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": {
+          "200": { "description": "Pet found" }
+        }
+      },
+      "put": {
+        "summary": "Update pet",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string" }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Pet"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": { "description": "Pet updated" }
+        }
+      },
+      "delete": {
+        "summary": "Delete pet",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": {
+          "204": { "description": "Pet deleted" }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Pet": {
+        "type": "object",
+        "required": ["name"],
+        "properties": {
+          "id": { "type": "string" },
+          "name": { "type": "string" },
+          "status": {
+            "type": "string",
+            "enum": ["available", "pending", "sold"]
+          }
+        }
+      }
+    }
+  }
+}

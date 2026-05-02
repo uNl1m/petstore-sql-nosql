@@ -51,7 +51,7 @@ ENV_FILE=.env.mongo docker compose --profile mongo up
 
 ## Running PostgreSQL
 
-ENV_FILE=.env.postgres docker compose --profile postgres up
+ENV_FILE=.env.sql docker compose --profile sql up
 
 
 ## Swagger doc
@@ -61,4 +61,20 @@ ENV_FILE=.env.postgres docker compose --profile postgres up
 
 ## Run the test locally
 
-npm test
+npm run test:mongo
+npm run test:sql
+
+## Inspect MongoDb
+
+
+docker exec -it petstore-node-mongo-mongo-1 mongosh
+use petstore
+db.pets.find().pretty()
+
+
+## Inspect PostgreSQL
+
+
+docker exec -it petstore-node-mongo-postgres-1 psql -U postgres -d petstore
+\dt
+SELECT * FROM "Pets";
