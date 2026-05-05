@@ -6,6 +6,8 @@
   "scripts": {
     "start": "node src/server.js",
     "test": "jest",
+    "test_ci:mongo": "DB_TYPE=mongo jest",
+    "test_ci:sql": "DB_TYPE=sql jest",
     "test:mongo": "DB_TYPE=mongo MONGO_URL=mongodb://localhost:27017/petstore jest",
     "test:sql": "DB_TYPE=sql DB_HOST=localhost DB_NAME=petstore DB_USER=postgres DB_PASSWORD=postgres jest"
   },

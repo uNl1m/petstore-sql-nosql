@@ -28,7 +28,7 @@ jobs:
       - name: Run Mongo tests
         env:
           ENV_FILE: .env.mongo
-        run: docker compose --profile mongo run --rm api npm run test:mongo
+        run: docker compose --profile mongo run --rm api npm run test_ci:mongo
 
       - name: Upload Mongo report
         if: always()
@@ -64,7 +64,7 @@ jobs:
       - name: Run SQL tests
         env:
           ENV_FILE: .env.sql
-        run: docker compose --profile sql run --rm api npm run test:sql
+        run: docker compose --profile sql run --rm api npm run test_ci:sql
 
       - name: Upload SQL report
         if: always()
