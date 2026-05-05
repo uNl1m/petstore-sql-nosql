@@ -58,9 +58,29 @@ ENV_FILE=.env.mongo docker compose --profile mongo up
 ENV_FILE=.env.sql docker compose --profile sql up
 
 
-## Swagger doc
 
-[localhost:](http://localhost:3000/api-docs)
+---
+
+### 🔍 What the Tests Check
+
+#### 🐾 Pet Management
+- Create a new pet with valid data
+- Retrieve pet details by ID
+- Update existing pet information
+- Delete a pet and verify it is no longer accessible
+- Validate error handling for non‑existing pet IDs
+
+#### 👤 Store & Inventory
+- Retrieve inventory status
+- Validate response structure and data types
+- Ensure inventory values are not negative
+
+#### 🧾 Order Processing
+- Place a new order for a pet
+- Retrieve order details by order ID
+- Delete an order and verify removal
+- Handle invalid and expired orders correctly
+
 
 
 ## Run the test locally
