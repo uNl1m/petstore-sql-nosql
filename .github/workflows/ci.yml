@@ -1,0 +1,80 @@
+name: Pet Store CI
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  test-mongo:
+    name: Tests (MongoDB)
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Build services
+        env:
+          ENV_FILE: .env.mongo
+        run: docker compose --profile mongo build
+
+      - name: Start MongoDB
+        env:
+          ENV_FILE: .env.mongo
+        run: docker compose --profile mongo up -d mongo
+
+      - name: Run Mongo tests
+        env:
+          ENV_FILE: .env.mongo
+        run: docker compose --profile mongo run --rm api npm run test:mongo
+
+      - name: Upload Mongo report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: jest-report-mongo
+          path: reports
+
+      - name: Cleanup
+        if: always()
+        env:
+          ENV_FILE: .env.mongo
+        run: docker compose down -v
+
+  test-postgres:
+    name: Tests (PostgreSQL)
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Build services
+        env:
+          ENV_FILE: .env.sql
+        run: docker compose --profile sql build
+
+      - name: Start PostgreSQL
+        env:
+          ENV_FILE: .env.sql
+        run: docker compose --profile sql up -d postgres
+
+      - name: Run SQL tests
+        env:
+          ENV_FILE: .env.sql
+        run: docker compose --profile sql run --rm api npm run test:sql
+
+      - name: Upload SQL report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: jest-report-postgres
+          path: reports
+
+      - name: Cleanup
+        if: always()
+        env:
+          ENV_FILE: .env.sql
+        run: docker compose down -v
