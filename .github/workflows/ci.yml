@@ -25,6 +25,9 @@ jobs:
           ENV_FILE: .env.mongo
         run: docker compose --profile mongo up -d mongo
 
+      - name: Prepare reports directory
+        run: mkdir -p reports/mongo
+
       - name: Run Mongo tests
         env:
           ENV_FILE: .env.mongo
@@ -35,7 +38,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: jest-report-mongo
-          path: reports
+          path: reports/mongo
 
       - name: Cleanup
         if: always()
@@ -61,6 +64,9 @@ jobs:
           ENV_FILE: .env.sql
         run: docker compose --profile sql up -d postgres
 
+      - name: Prepare reports directory
+        run: mkdir -p reports/sql
+
       - name: Run SQL tests
         env:
           ENV_FILE: .env.sql
@@ -71,7 +77,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: jest-report-postgres
-          path: reports
+          path: reports/sql
 
       - name: Cleanup
         if: always()
