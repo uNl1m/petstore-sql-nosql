@@ -82,6 +82,12 @@ ENV_FILE=.env.sql docker compose --profile sql up
 - Handle invalid and expired orders correctly
 
 
+# Tests execution
+
+Tests are running automatically after merge to branch
+
+The report of the text execution you can check in [github actions](https://github.com/uNl1m/petstore-sql-nosql/actions)
+
 
 ## Run the test locally
 
